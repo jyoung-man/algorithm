@@ -1,0 +1,55 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+int find_parent(int parent[], int child) {
+	if (child == parent[child])
+		return child;
+	else
+		return parent[child] = find_parent(parent, parent[child]);
+}
+
+void union_parent(int parent[], int x, int y) {
+	int px = find_parent(parent, x);
+	int py = find_parent(parent, y);
+
+	if (px > py) {
+		parent[x] = py;
+	}
+	else
+		parent[y] = px;
+}
+
+int main() {
+	int parent[100001];
+	int G, P, gi;
+	int temp;
+	vector<int> plains;
+	plains.push_back(0);
+	int count = 0;
+	cin >> G >> P;
+	
+	for (int i = 0; i <= G; i++) {
+		parent[i] = i;
+	}
+
+	for (int i = 0; i < P; i++) {
+		cin >> gi;
+		plains.push_back(gi);
+	}
+
+	for (int i = 1; i <= P; i++) {
+		temp = find_parent(parent, plains[i]);
+		if (temp == 0) {
+			break;
+		}
+		else {
+			count++;
+			union_parent(parent, temp, temp - 1);
+		}
+	}
+	cout << count << endl;
+
+	return 0;
+}
