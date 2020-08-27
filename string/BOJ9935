@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+//string input_string;
+//string pattern;
+
+int check_string(string input_string, string pattern) {
+	vector <char> string_checker;
+	int str_length = input_string.size();
+	int pat_length = pattern.size();
+	int answer_length;
+	bool isEqual;
+
+	for (int i = 0; i < str_length; i++) {
+		string_checker.push_back(input_string[i]);
+
+		if (string_checker.back() == pattern[pat_length - 1]) {
+			isEqual = true;
+			answer_length = string_checker.size();
+
+			for (int j = 1; j < pat_length; j++) {
+				if (string_checker[answer_length - j - 1] != pattern[pat_length - j - 1]) {
+					isEqual = false;
+					break;
+				}
+			}
+			if (isEqual) {
+				for (int j = 0; j < pat_length; j++) {
+					string_checker.pop_back();
+				}
+			}
+		}
+
+	}
+	answer_length = string_checker.size();
+	if (answer_length > 0) {
+		for (int i = 0; i < answer_length; i++) {
+			cout << string_checker[i];
+		}
+	} else {
+		cout << "FRULA" << endl;
+	}
+
+	return 0;
+}
+
+int main() {
+	string input;
+	string pattern;
+
+	cin >> input >> pattern;
+
+	check_string(input, pattern);
+
+	return 0;
+}
