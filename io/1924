@@ -1,0 +1,58 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int count_days(int month, int day) {
+	day = (month - 1) * 31 + day;
+	if (month > 11) {
+		day -= 7;
+	}
+	else if (month > 9) {
+		day -= 6;
+	}
+	else if (month > 6) {
+		day -= 5;
+	}
+	else if (month > 4) {
+		day -= 4;
+	}
+	else if (month > 2) {
+		day -= 3;
+	}
+	day = day % 7;
+
+	return day;
+}
+
+void get_day(int days) {
+	string day;
+	switch (days) {
+	case 0: day = "SUN";
+		break;
+	case 1: day = "MON";
+		break;
+	case 2: day = "TUE";
+		break;
+	case 3: day = "WED";
+		break;
+	case 4: day = "THU";
+		break;
+	case 5: day = "FRI";
+		break;
+	case 6: day = "SAT";
+		break;
+	default:
+		break;
+	}
+	cout << day << endl;
+}
+
+int main() {
+	int month, day, result;
+	char what_day;
+	cin >> month >> day;
+	result = count_days(month, day);
+	get_day(result);
+
+	return 0;
+}
